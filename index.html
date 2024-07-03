@@ -14,10 +14,13 @@
         </header>
 
         <!--FORMULARIO-->
+        <div>
+            <p id="error"></p>
+        </div>
         <main>
             <form action="game.html" id="formEntrada">
                 <div class="itemform">
-                    <label for="nick">Introduce tu nick</label>
+                    <label for="nick">Introduce tu nick*</label>
                     <input type="text" name="nick" value="@" id="nicka" readonly>
                     <input type="text" name="nick" id="nick">
                 </div>
@@ -26,13 +29,16 @@
                     <input type="email" name="correo" id="correo">
                 </div>
                 <div class="itemform">
-                    <label for="tamano">Tamaño del juego</label>
+                    <label for="tamano">Tamaño del juego*</label>
                     <select name="tamano" id="tamano" required>
                         <option value="0">--Por favor elige un tamaño--</option>
                         <option value="1">4x4</option>
                         <option value="2">5x5</option>
                         <option value="3">6x6</option>
                     </select>
+                </div>
+                <div>
+                    <p>* Obligatorio</p>
                 </div>
                 <div class="itemform">
                     <input type="submit" value="JUGAR" id="jugar">
@@ -45,5 +51,6 @@
             <p>Curso FrontEnd diseñar HTML, CSS y JS</p>
         </footer>
         <script src="./js/app.js"></script>
+        <script src="./js/datosUsuario.js"></script>
     </body>
 </html>

@@ -47,6 +47,7 @@ input[type=submit]{
 select{
     width: 100%;
     border: 1px solid #ced4da;
+    color: #999;
     padding: 10px;
     border-radius: 0px 5px 5px 0px;
     font-weight: 200;
@@ -57,7 +58,16 @@ select{
 #nicka{
     float: left;
     width: 20px;
+    color: #999;
     background-color: #ced4da;
     border: 1px solid #ced4da;
     border-radius: 5px 0px 0px 5px;
+}
+
+#error{
+    text-align: center;
+    color: #fd0c49;
+    font-weight: 300;
+    font-size: 14px;
+    margin: 10px 0px 10px 0px;
 }
