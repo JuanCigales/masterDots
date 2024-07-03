@@ -18,16 +18,20 @@
             <form action="#">
                 <div class="itemform">
                     <label for="nick">Introduce tu nick</label>
+                    <input type="text" name="nick" value="@" id="nicka" required>
                     <input type="text" name="nick" id="nick" required>
                 </div>
                 <div class="itemform">
                     <label for="tamano">Tamaño del juego</label>
-                    <select name="tamano" id="tamano">
+                    <select name="tamano" id="tamano" required>
                         <option value="">--Por favor elige un tamaño--</option>
                         <option value="1">4x4</option>
                         <option value="1">5x5</option>
                         <option value="1">6x6</option>
                     </select>
+                </div>
+                <div class="itemform">
+                    <input type="submit" value="JUGAR">
                 </div>
             </form>
         </main>
