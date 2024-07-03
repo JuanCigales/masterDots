@@ -11,6 +11,7 @@ function checkForm(event){
     if(nickInput.value.length == 0){
         console.log("No hay nick");
         nickInput.focus();
+        event.preventDefault();
         return false;
     }
     else if(tamanoInput.value=="0"){
