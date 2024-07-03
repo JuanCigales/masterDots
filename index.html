@@ -1,10 +1,40 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Masterdots game</title>
-</head>
-<body>
-    
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Masterdots game</title>
+        <link rel="stylesheet" href="./css/reset.css">
+        <link rel="stylesheet" href="./css/estilos.css">
+    </head>
+
+    <body>
+        <!--CABECERA-->
+        <header>
+            <img src="./imagenes/logo1.png" alt="logo juego" height="60">
+        </header>
+
+        <!--FORMULARIO-->
+        <main>
+            <form action="#">
+                <div class="itemform">
+                    <label for="nick">Introduce tu nick</label>
+                    <input type="text" name="nick" id="nick" required>
+                </div>
+                <div class="itemform">
+                    <label for="tamano">Tamaño del juego</label>
+                    <select name="tamano" id="tamano">
+                        <option value="">--Por favor elige un tamaño--</option>
+                        <option value="1">4x4</option>
+                        <option value="1">5x5</option>
+                        <option value="1">6x6</option>
+                    </select>
+                </div>
+            </form>
+        </main>
+
+        <!--PIE DE PAGINA-->
+        <footer>
+            <p>Curso FrontEnd diseñar HTML, CSS y JS</p>
+        </footer>
+    </body>
 </html>
