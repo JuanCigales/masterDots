@@ -66,7 +66,7 @@ function checkForm(event){
     }
 
     //Informacion correcta
-    datosUsuario(nickInput, tamanoInput, emailInput);
+    datosUsuario(nickInput, tamanoInput, emailInput, avatarCont);
     historicoUsuario(nickInput);
     return true;
 }
