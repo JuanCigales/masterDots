@@ -1,4 +1,11 @@
 /* JS para el Juego MASTERDOTS */
+
+//VARIABLES GLOBALES
+var iniciadoMarcado=false;
+
+/**
+ * INICIALIZACION DEL PANEL
+ */
 function getRandom(max){
     return Math.floor(Math.random()*max);
 }
@@ -21,22 +28,52 @@ function pintarPanelJuego(){
     document.getElementById("juego").innerHTML=items;
 }
 
+
+/**
+ * EVENTOS DEL JUEGO
+ */
 function programarEventosJuego(){
     const items=document.getElementsByClassName('item');
     for (let item of items) {
-        item.addEventListener('mousedown',comenzarMarcar);
+        item.addEventListener('mousedown',comenzarMarcar);  //marcar
+        item.addEventListener('mouseover',continuarMarcando);  //arrastrar
     }
+    document.addEventListener('mouseup',finalizarMarcado);  //soltar
+
 }
 
+/**
+ * FUNCIONES DEL JUEGO
+ */
 function comenzarMarcar(event){
     let item = event.target;
     let containerItem=event.target.parentElement;
     if (item.classList.contains('rojo')) containerItem.classList.add('rojo');
     else containerItem.classList.add('verde');
-
+    if (!iniciadoMarcado) iniciadoMarcado = true;
     console.log("pinchado sobre un circulo");
 }
 
+function continuarMarcando(event){
+    if(iniciadoMarcado){
+        let item = event.target;
+        let containerItem=event.target.parentElement;
+        if (item.classList.contains('rojo')) containerItem.classList.add('rojo');
+        else containerItem.classList.add('verde'); 
+    }
+    console.log("pasando sobre un circulo");
+
+}
+
+function finalizarMarcado(event){
+    console.log("finalizarmarcado");
+    iniciadoMarcado=false;
+}
+
+
+/**
+ * MAIN DEL JUEGO
+ */
 //Capturamos los datos usuario
 getDatosUsuario();
 //Comprobamos los datos
