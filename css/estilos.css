@@ -71,3 +71,38 @@ select{
     font-size: 14px;
     margin: 10px 0px 10px 0px;
 }
+
+/*Avatares*/
+.avatarItem{
+    background-color: #fff;
+    border: solid 1px #fd0c49;
+    border-radius: 5px;
+    width: 55px;
+    height: 55px;
+    padding: 5px 0px 0px 5px;
+}
+
+#avatar{
+    float: left;
+}
+
+#avatarContainer{
+    display: flex;
+    background-color: #fff;
+    border: solid 1px #fd0c49;
+    border-radius: 5px;
+    width: 75px;
+    height: 75px;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+}
+
+#avatarGrid{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 30px;
+}

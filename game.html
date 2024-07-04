@@ -6,8 +6,61 @@
     <title>Juego MasterDots</title>
 </head>
 <body>
-    <h1>JUEGO MASTERDOTS</h1>
-    
+    <main>
+        <div id="contenedorJuego">
+            <div id="juego">
+                <div class="containerItem">
+                    <div class="item"></div>
+                </div>
+                <div class="containerItem">
+                    <div class="item"></div>
+                </div>
+                <div class="containerItem">
+                    <div class="item"></div>
+                </div>
+                <div class="containerItem">
+                    <div class="item"></div>
+                </div>
+                <div class="containerItem">
+                    <div class="item"></div>
+                </div>
+                <div class="containerItem">
+                    <div class="item"></div>
+                </div>
+                <div class="containerItem">
+                    <div class="item"></div>
+                </div>
+                <div class="containerItem">
+                    <div class="item"></div>
+                </div>
+                <div class="containerItem">
+                    <div class="item"></div>
+                </div>
+            </div>
+            <div id="tituloJuego">
+                <h1>JUEGO MASTERDOTS</h1>
+            </div>
+        </div>
+        <div id="contenedorUsuario">
+            <form id="fomt_entrada" action="game.html">
+                <div class="itemform">
+                    <img src="./imagenes/avatar1.png" alt="avatarUsuario" width="26">
+                    <input type="text" id="nick" value="nick" readonly>
+                </div>
+                <div class="itemform">
+                    <label for="puntuacion">puntuacion</label>
+                    <input type="text" id="puntuacion" value="0" class="inputJuego" readonly>
+                </div>
+                <div class="itemform">
+                    <label for="tmpo">tiempo restante</label>
+                    <input type="text" id="tmpo" value="30" class="inputJuego" readonly>
+                </div>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p>Curso FrontEnd diseñar HTML, CSS y JS</p>
+    </footer>
     <!--Codigo JS-->
     <script src="./js/datosUsuario.js"></script>
     <script src="./js/juego.js"></script>

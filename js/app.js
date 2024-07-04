@@ -1,16 +1,52 @@
 /*Codigo para la captura de informacion del formulario */
 
 //Inicializar vars / const
-const nickInput = document.getElementById("nick");
-const tamanoInput = document.getElementById("tamano");
-const emailInput = document.getElementById("correo");
-const formEntrada = document.getElementById("formEntrada");
-const error = document.getElementById("error");
+var nickInput;
+var tamanoInput;
+var emailInput;
+var formEntrada;
+var error;
+var avatarItems;
+var itemImg;
+var avatarCont;
 
-//Comprobar si hay algun error de game.html
-if(sessionStorage.getItem('error')!=null){
-    error.innerText = sessionStorage.getItem('error');
-    sessionStorage.removeItem('error');
+function moviendoImg(event){
+    itemImg = event.target;
+    console.log(itemImg.src);
+}
+function cambiarImg(event){
+    avatarCont.src=itemImg.src;
+}
+
+/**
+ * Carga de objetos del DOM, comprobaciones y eventos del formulario
+ */
+function domLoaded(){
+    //Capturar todos los elementos
+    nickInput = document.getElementById("nick");
+    tamanoInput = document.getElementById("tamano");
+    emailInput = document.getElementById("correo");
+    formEntrada = document.getElementById("formEntrada");
+    error = document.getElementById("error");
+
+    //Comprobar si hay algun error de game.html
+    if(sessionStorage.getItem('error')!=null){
+        error.innerText = sessionStorage.getItem('error');
+        sessionStorage.removeItem('error');
+    }
+
+    //Comprobamos el formulario
+    formEntrada.addEventListener('submit', checkForm);
+
+    //Eventos del D&D
+    avatarItems = document.getElementsByClassName("avatarImgItem");
+    for (let item of avatarItems){
+        item.addEventListener('dragstart', moviendoImg);
+
+    }
+    avatarCont = document.getElementById("avatarImg");
+    avatarCont.addEventListener('dragover', e=>(e.preventDefault()));
+    avatarCont.addEventListener('drop', cambiarImg);
 }
 
 //Evento de enviar la informacion
@@ -36,6 +72,6 @@ function checkForm(event){
 }
 
 //Formulario de entrada
-formEntrada.addEventListener('submit', checkForm);
+document.addEventListener('DOMContentLoaded', domLoaded);
 //Geolocalizacion
 datoGeoLocalizacion();
