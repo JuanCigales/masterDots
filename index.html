@@ -22,7 +22,7 @@
                 <div class="itemform">
                     <label for="nick">Introduce tu nick*</label>
                     <input type="text" name="nick" value="@" id="nicka" readonly>
-                    <input type="text" name="nick" id="nick" required>
+                    <input type="text" name="nick" id="nick" required minlength="2">
                 </div>
                 <div class="itemform">
                     <label for="correo">Introduce tu email</label>
@@ -40,22 +40,29 @@
                 <div class="itemform">
                     <div id="avatar">
                         <label for="avatar">avatar</label>
+                        <input type="hidden" id="avatar" value="1">
                         <div id="avatarContainer">
-                            <img src="./imagenes/avatar1.png" class="avatarImg" alt="avatar1" width="70" id="avatarImg" draggable="false">
+                            <img src="./imagenes/avatar1.png" alt="" id="avatarImg">
                         </div>
                     </div>
-                    <div id="avatarGrid">
+                    <div id="avatargrid">
                         <div class="avatarItem">
-                            <img src="./imagenes/avatar1.png" class="avatarImgItem" alt="avatar1" width="50" draggable="true">
+                            <img src="./imagenes/avatar1.png" class="avatarImgItem" alt="" width="35" draggable="true">
                         </div>
                         <div class="avatarItem">
-                            <img src="./imagenes/avatar2.jpeg" class="avatarImgItem" alt="avatar2" width="50" draggable="true">
+                            <img src="./imagenes/avatar2.png" class="avatarImgItem" alt="" width="35" draggable="true">
                         </div>
                         <div class="avatarItem">
-                            <img src="./imagenes/avatar3.png" class="avatarImgItem" alt="avatar2" width="50" draggable="true">
+                            <img src="./imagenes/avatar3.png" class="avatarImgItem" alt="" width="35" draggable="true">
                         </div>
                         <div class="avatarItem">
-                            <img src="./imagenes/avatar4.jpeg" class="avatarImgItem" alt="avatar2" width="50" draggable="true">
+                            <img src="./imagenes/avatar4.png" class="avatarImgItem" alt="" width="35" draggable="true">
+                        </div>
+                        <div class="avatarItem">
+                            <img src="./imagenes/avatar5.png" class="avatarImgItem" alt="" width="35" draggable="true">
+                        </div>
+                        <div class="avatarItem">
+                            <img src="./imagenes/avatar6.png" class="avatarImgItem" alt="" width="35" draggable="true">
                         </div>
                     </div>
                 </div>
