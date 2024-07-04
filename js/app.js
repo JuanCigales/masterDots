@@ -3,6 +3,7 @@
 //Inicializar vars / const
 const nickInput = document.getElementById("nick");
 const tamanoInput = document.getElementById("tamano");
+const emailInput = document.getElementById("email");
 const formEntrada = document.getElementById("formEntrada");
 const error = document.getElementById("error");
 
@@ -29,9 +30,12 @@ function checkForm(event){
     }
 
     //Informacion correcta
-    datosUsuario(nickInput);
+    datosUsuario(nickInput, tamanoInput, emailInput);
+    historicoUsuario(nickInput);
     return true;
 }
 
 //Formulario de entrada
 formEntrada.addEventListener('submit', checkForm);
+//Geolocalizacion
+datoGeoLocalizacion();
