@@ -9,6 +9,7 @@ function datosUsuario(nick, tamano, email){
     sessionStorage.setItem('nick', nick.value);
     sessionStorage.setItem('tamano', tamano.value);
     sessionStorage.setItem('email', email.value);
+    sessionStorage.setItem('geoLocalizacionTxt', geoLocalizacionTxt);
 }
 
 function getDatosUsuario(){
@@ -27,15 +28,14 @@ function comprobacionDeDatosUsuario(){
 
 function datoGeoLocalizacion(){
     if (!navigator.geolocation){
-        geoLocalizacionTxt = "El navegador no es compatible con API Geoocation";
+        geoLocalizacionTxt="El navegador no es compatible con API Geoocation";
     }
     else{
         navigator.geolocation.getCurrentPosition(
             //Exito
-            (position)=>{geoLocalizacionTxt='Latitud'+position.coords.latitude+', Longitud'+position.coords.longitude},
-
-            //Fallo
-            ()=>{geoLocalizacionTxt = "El navegador no es compatible con API Geoocation";}
+            (position)=>{geoLocalizacionTxt='Latitud:'+position.coords.latitude+',longitud:'+position.coords.longitude},
+            //Error
+            ()=>{geoLocalizacionTxt="La geolocalizacion no se ha podido realizar";}
         )
     }
 }

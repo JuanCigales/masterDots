@@ -3,7 +3,7 @@
 //Inicializar vars / const
 const nickInput = document.getElementById("nick");
 const tamanoInput = document.getElementById("tamano");
-const emailInput = document.getElementById("email");
+const emailInput = document.getElementById("correo");
 const formEntrada = document.getElementById("formEntrada");
 const error = document.getElementById("error");
 
