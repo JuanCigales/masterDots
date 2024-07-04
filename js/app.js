@@ -6,6 +6,11 @@ const tamanoInput = document.getElementById("tamano");
 const formEntrada = document.getElementById("formEntrada");
 const error = document.getElementById("error");
 
+//Comprobar si hay algun error de game.html
+if(sessionStorage.getItem('error')!=null){
+    error.innerText = sessionStorage.getItem('error');
+    sessionStorage.removeItem('error');
+}
 
 //Evento de enviar la informacion
 function checkForm(event){
