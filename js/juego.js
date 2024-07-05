@@ -2,6 +2,9 @@
 
 //VARIABLES GLOBALES
 var iniciadoMarcado=false;
+var adyacentes=[];
+var tamanoPanel;
+var classMarcado;
 
 /**
  * INICIALIZACION DEL PANEL
@@ -13,6 +16,7 @@ function getRandom(max){
 function rellenarFormularioUsusario(){
     document.getElementById("nick").value=nick;
     document.getElementById("avatarImg").src=avatarImg;
+    tamanoPanel=parseInt(tamano);
 }
 
 function pintarPanelJuego(){
@@ -23,11 +27,26 @@ function pintarPanelJuego(){
     let colorRnd=0;
     for (let index = 0; index < (parseInt(tamano)*parseInt(tamano)); index++){
         if (index%2>0) colorRnd=getRandom(2);
-        items+=`<div class="containerItem"><div class="item ${color[colorRnd]}"></div></div>`;
+        items+=`<div class="containerItem"><div id="${index}" class="item ${color[colorRnd]}"></div></div>`;
     }
     document.getElementById("juego").innerHTML=items;
 }
 
+/**
+ * Calcula el adyacente
+ */
+function calcularAdyacentes(idMarcado){
+    adyacentes=[];
+    // 4 tipos de adyacecians (superior, inferior, lateral derecho y lateral izquierd)
+    if((idMarcado-tamanoPanel) >= 0) adyacentes.push(idMarcado-tamanoPanel);                        //Check de superior
+    if((idMarcado+tamanoPanel) < (tamanoPanel*tamanoPanel)) adyacentes.push(idMarcado+tamanoPanel); //Check de inferior
+    if((idMarcado%tamanoPanel) > 0) adyacentes.push(idMarcado-1);                                   //Check de izquierda
+    if(((idMarcado+1)%tamanoPanel) > 0) adyacentes.push(idMarcado+1);                               //Check de derecha         
+
+    for (let index = 0; index < adyacentes.length; index++) {
+        console.log(adyacentes[index]);        
+    }
+}
 
 /**
  * EVENTOS DEL JUEGO
@@ -48,9 +67,18 @@ function programarEventosJuego(){
 function comenzarMarcar(event){
     let item = event.target;
     let containerItem=event.target.parentElement;
-    if (item.classList.contains('rojo')) containerItem.classList.add('rojo');
-    else containerItem.classList.add('verde');
+    if (item.classList.contains('rojo')) {
+        classMarcado="rojo";
+        containerItem.classList.add('rojo');
+    }
+    else {
+        classMarcado="verde";
+        containerItem.classList.add('verde');
+    }
     if (!iniciadoMarcado) iniciadoMarcado = true;
+
+    calcularAdyacentes(parseInt(item.id));
+
     console.log("pinchado sobre un circulo");
 }
 
@@ -58,11 +86,14 @@ function continuarMarcando(event){
     if(iniciadoMarcado){
         let item = event.target;
         let containerItem=event.target.parentElement;
-        if (item.classList.contains('rojo')) containerItem.classList.add('rojo');
-        else containerItem.classList.add('verde'); 
+        let idNuevo = parseInt(item.id);
+        if (adyacentes.includes(idNuevo) && event.target.classList.contains(classMarcado)){
+            if (item.classList.contains('rojo')) containerItem.classList.add('rojo');
+            else containerItem.classList.add('verde'); 
+            calcularAdyacentes(idNuevo);
+        }
     }
     console.log("pasando sobre un circulo");
-
 }
 
 function finalizarMarcado(event){
