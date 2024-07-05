@@ -5,6 +5,7 @@ var iniciadoMarcado=false;
 var adyacentes=[];
 var tamanoPanel;
 var classMarcado;
+var idMarcadas=[];
 
 /**
  * INICIALIZACION DEL PANEL
@@ -76,7 +77,8 @@ function comenzarMarcar(event){
         containerItem.classList.add('verde');
     }
     if (!iniciadoMarcado) iniciadoMarcado = true;
-
+    
+    idMarcadas.push(item.id);
     calcularAdyacentes(parseInt(item.id));
 
     console.log("pinchado sobre un circulo");
@@ -90,6 +92,7 @@ function continuarMarcando(event){
         if (adyacentes.includes(idNuevo) && event.target.classList.contains(classMarcado)){
             if (item.classList.contains('rojo')) containerItem.classList.add('rojo');
             else containerItem.classList.add('verde'); 
+            idMarcadas.push(idNuevo);
             calcularAdyacentes(idNuevo);
         }
     }
@@ -97,6 +100,21 @@ function continuarMarcando(event){
 }
 
 function finalizarMarcado(event){
+    //antes podriamos ir calculando la puntuacion
+
+    //generamos nuevos colores
+    for (let i = 0; i < idMarcadas.length; i++){
+        //eliminamos el color
+        let itemMarcado=document.getElementById(idMarcadas[i]);
+        itemMarcado.parentElement.classList.remove(classMarcado);
+        //cambiar color de los objetos de forma random
+        let color = ["rojo", "verde"];
+        let colorRnd = getRandom(2);
+        itemMarcado.classList.remove(classMarcado);
+        itemMarcado.classList.add(color[colorRnd]);
+    }
+    idMarcadas=[];
+    //console.log(idMarcadas.length);
     console.log("finalizarmarcado");
     iniciadoMarcado=false;
 }
