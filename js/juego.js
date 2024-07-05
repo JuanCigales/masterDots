@@ -6,6 +6,7 @@ var adyacentes=[];
 var tamanoPanel;
 var classMarcado;
 var idMarcadas=[];
+var idInterval;
 
 /**
  * INICIALIZACION DEL PANEL
@@ -44,9 +45,10 @@ function calcularAdyacentes(idMarcado){
     if((idMarcado%tamanoPanel) > 0) adyacentes.push(idMarcado-1);                                   //Check de izquierda
     if(((idMarcado+1)%tamanoPanel) > 0) adyacentes.push(idMarcado+1);                               //Check de derecha         
 
-    for (let index = 0; index < adyacentes.length; index++) {
+
+    /*for (let index = 0; index < adyacentes.length; index++) {
         console.log(adyacentes[index]);        
-    }
+    }*/
 }
 
 /**
@@ -55,11 +57,12 @@ function calcularAdyacentes(idMarcado){
 function programarEventosJuego(){
     const items=document.getElementsByClassName('item');
     for (let item of items) {
-        item.addEventListener('mousedown',comenzarMarcar);  //marcar
-        item.addEventListener('mouseover',continuarMarcando);  //arrastrar
-    }
-    document.addEventListener('mouseup',finalizarMarcado);  //soltar
+        item.addEventListener('mousedown',comenzarMarcar);      //marcar
+        item.addEventListener('mouseover',continuarMarcando);   //arrastrar
+    }   
+    document.addEventListener('mouseup',finalizarMarcado);      //soltar
 
+    idInterval = setInterval(cuentaAtras, 1000);                //cuenta atras
 }
 
 /**
@@ -77,11 +80,10 @@ function comenzarMarcar(event){
         containerItem.classList.add('verde');
     }
     if (!iniciadoMarcado) iniciadoMarcado = true;
-    
-    idMarcadas.push(item.id);
+    idMarcadas.push(parseInt(item.id));
     calcularAdyacentes(parseInt(item.id));
 
-    console.log("pinchado sobre un circulo");
+    //console.log("pinchado sobre un circulo");
 }
 
 function continuarMarcando(event){
@@ -89,34 +91,81 @@ function continuarMarcando(event){
         let item = event.target;
         let containerItem=event.target.parentElement;
         let idNuevo = parseInt(item.id);
-        if (adyacentes.includes(idNuevo) && event.target.classList.contains(classMarcado)){
+        if(idMarcadas.includes(idNuevo)){
+            console.log("Si lo tiene nene");
+        }
+        if (adyacentes.includes(idNuevo) && event.target.classList.contains(classMarcado) && !idMarcadas.includes(idNuevo)){
             if (item.classList.contains('rojo')) containerItem.classList.add('rojo');
             else containerItem.classList.add('verde'); 
             idMarcadas.push(idNuevo);
             calcularAdyacentes(idNuevo);
         }
     }
-    console.log("pasando sobre un circulo");
+    //console.log("pasando sobre un circulo");
 }
 
 function finalizarMarcado(event){
-    //antes podriamos ir calculando la puntuacion
+    //Reset de algunas de las variables globales
+    iniciadoMarcado=false;
+    adyacentes=[];
 
-    //generamos nuevos colores
-    for (let i = 0; i < idMarcadas.length; i++){
-        //eliminamos el color
-        let itemMarcado=document.getElementById(idMarcadas[i]);
-        itemMarcado.parentElement.classList.remove(classMarcado);
-        //cambiar color de los objetos de forma random
-        let color = ["rojo", "verde"];
-        let colorRnd = getRandom(2);
-        itemMarcado.classList.remove(classMarcado);
-        itemMarcado.classList.add(color[colorRnd]);
+    //antes podriamos ir calculando la puntuacion
+    const puntuacionInput = document.getElementById("puntuacion");
+    if (idMarcadas.length>1) {
+        puntuacionInput.value = parseInt(puntuacionInput.value)+idMarcadas.length*10;
+
+        //generamos nuevos colores
+        for (let i = 0; i < idMarcadas.length; i++){
+            //eliminamos el color
+            let itemMarcado=document.getElementById(idMarcadas[i]);
+            itemMarcado.parentElement.classList.remove(classMarcado);
+            //cambiar color de los objetos de forma random
+            let color = ["rojo", "verde"];
+            let colorRnd = getRandom(2);
+            itemMarcado.classList.remove(classMarcado);
+            itemMarcado.classList.add(color[colorRnd]);
+        }
     }
+    else{
+        //desmarcamos (seria remove del padre que es quien da el efecto de marcado)
+        let itemMarcado=document.getElementById(idMarcadas[0]);
+        itemMarcado.parentElement.classList.remove(classMarcado);
+    }
+    
     idMarcadas=[];
     //console.log(idMarcadas.length);
     console.log("finalizarmarcado");
-    iniciadoMarcado=false;
+}
+
+/**
+ * funcion que se encarga del conteo hacia atras/tiempo de juego
+ */
+function cuentaAtras(){
+    let tiempoRestante = (document.getElementById("tmpo").value)-1;
+    document.getElementById("tmpo").value = tiempoRestante;
+    //cuando el tiempo restante es 0 finalizamos partida
+    if(tiempoRestante == 0){
+        clearInterval(idInterval);
+        finalizarPartida();
+    }
+}
+
+/**
+ * Funcion para finalizar la partida
+ */
+function finalizarPartida(){
+    const items=document.getElementsByClassName('item');
+    for (let item of items) {
+        item.removeEventListener('mousedown',comenzarMarcar);      //marcar
+        item.removeEventListener('mouseover',continuarMarcando);   //arrastrar
+    }   
+    document.removeEventListener('mouseup',finalizarMarcado);      //soltar
+
+    //Ponemos la pantalla de fin de partida
+    document.getElementById("juegoAcabado").classList.add("juegoAcabadoColor");
+    document.getElementById("juegoAcabado").style.zIndex=2;
+    document.getElementById("juego").style.zIndex=1;
+    document.getElementById("nuevaPartida").addEventListener("click",(event)=>location.reload());
 }
 
 
